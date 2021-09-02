@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style></style>
+</head>
+<body>
+  <script>
+    var username='🗼';
+    function ajax(){
+      // 1.创建异步对象
+    var xhr =new XMLHttpRequest();
+// 4.监听等待返回值
+   xhr.onreadystatechange= function(){
+     if(xhr.readyState==4){
+       if(xhr.status>=200&&xhr.status<300){
+         var result=xhr.responseText;
+         console.log(result);
+       }
+     }
+   } 
+  //  2.设置请求信息
+ xhr.open('delete',`/ajaxdel/${username}`,true);
+// 3.发送请求
+  xhr.send();
+    }
+    // 调用Ajax方法
+    ajax();
+  </script>
+  http://127.0.0.1:8080/05_del.html
+</body>
+</html>

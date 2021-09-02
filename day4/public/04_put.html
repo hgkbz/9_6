@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style></style>
+</head>
+<body>
+  <script>
+    var a='lili',b='是⚽⚾🥎🏀🏐';
+    // 创建一个ajax函数
+    function ajax(){
+//  1创建异步对象
+    var xhr = new XMLHttpRequest();
+    // 4.监听等待返回值
+    xhr.onreadystatechange=function(){
+      if(xhr.readyState==4){
+        if(xhr.status>=200&xhr.status<300){
+          var result=xhr.responseText;
+          console.log(result);
+        }
+      }
+    }
+    // 2.设置请求信息
+    xhr.open('PUT','/ajaxput',true);
+    // 3.请求头
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    // 4.发送请求
+    xhr.send(`names=${b}&oldname=${a}`);
+  }
+   // 调用ajax函数
+    ajax();
+  </script>
+  http://127.0.0.1:8080/04_put.html
+</body>
+</html>

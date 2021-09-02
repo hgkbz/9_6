@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Ajax</title>
+  <style></style>
+</head>
+<body>
+  <script>
+    // var zyn=new Object();
+    // zyn.a='hello';
+    // zyn.names='李傲鹏';
+    // alert(zyn.a+zyn.names);
+    // document.write(zyn.a+zyn.names);
+    // 1.ajax用于前后台交互
+    // 3，创建异步对象
+    var xhr = new XMLHttpRequest();
+    // console.log(xhr);
+    // 4.有了xhr方对象，就可以使用他的属性操作数据传输前的准备，如用什么方法（http请求方法），去什么地方（url接口地址），同步还是异步【设置请求信息】
+    xhr.open('GET','/ajaxget',false);
+    // 5,发送请求【不同方法，发送请求格式有不同】
+    // get方法直接是xhr.send(参数可省略)
+    xhr.send();
+    // 6，发送之后需要等待后台响应数据接收回前台【接收响应】
+    var result= xhr.responseText;
+    console.log(result);
+  </script>
+  123
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style></style>
+</head>
+<body>
+  用户名称：<input type="text" id="uname"><br>
+  用户密码：<input type="password" id="upwd"><br>
+  <button onclick="ajax()">登录</button>
+  <!-- <script>
+    function getMsg(){
+      // 直接通过元素id获取元素对象
+      var myuname=uname.value;
+      var mypwd=upwd.value;
+      document.write(myuname+mypwd);
+    }
+  </script> -->
+  <script>
+    // 创建一个自定义函数用于封装Ajax方法，什么时候使用，什么时候调用就可以
+    function ajax(){
+    //1.创建xhr对象
+    var xhr= new XMLHttpRequest();
+    // 4.原本直接接收数据，现在通过监听判断readState的值。为4时数据就回来了
+    xhr.onreadystatechange=function(){
+        //console.log(xhr.readyState)
+//  判断readyState是4时才可以拿到后台的数据       
+        if(xhr.readyState==4){
+// 可以拿到后台数据也不能保证后台出问题，判断后台返回内容成功，在进行数据的接收          
+          if(xhr.status>=200&&xhr.status<300){
+          var result =xhr.responseText;
+          console.log(result);}
+        }
+    }
+    // 2.设置请求信息
+    // getpar1传参方式时？的方式
+    var myuname=uname.value;
+      var mypwd=upwd.value;
+      
+    xhr.open('GET',`/getpar1?names=${myuname}&pwd=${mypwd}`,true);
+    //3.发送请求
+    xhr.send();
+    
+    }
+    ajax();
+  </script>
+  http://127.0.0.1:8080/01_get.html
+</body>
+</html>

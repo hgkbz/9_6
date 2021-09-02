@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style></style>
+</head>
+<body>
+  <script>
+    // 创建ajax函数
+    function ajax(){
+      // 1.创建异步对象
+    var xhr = new XMLHttpRequest();
+    // 4。监听并接收返回值
+    xhr.onreadystatechange=function(){
+      // 判断readyState==4
+      if(xhr.readyState==4){
+        // 判断状态码
+        if(xhr.status>=200&xhr.status<300){
+  // 接收返回内容        
+          var result=xhr.responseText;
+          console.log(result);
+        }
+      }
+    }
+    // 2.设置请求信息
+    xhr.open('POST','/ajaxpost',true);
+// 3.post方式发送之前必须指定传递参数的数据格式
+// 设置请求头，先指定请求参数的解析方式再传递数据
+   xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");    
+  //  4.发送请求
+  xhr.send('names=bnm&pwd=333');
+  }
+
+    // 调用Ajax函数
+    ajax();
+  </script>
+  post是🏪
+  http://127.0.0.1:8080/03_post.html
+</html>
