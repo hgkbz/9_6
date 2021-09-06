@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>所有宝贝</title>
+  <style></style>
+</head>
+<body>
+    <ul id="show" style="list-style: none;"></ul>
+    <script>
+      // 1.获取元素
+      var show = document.getElementById('show');
+      // 2.调用ajax
+      ajax();
+// ajax函数 接口地址/pokelist get方法
+     function ajax(){
+       var xhr=new XMLHttpRequest();
+       xhr.onreadystatechange=function(){
+         if(xhr.readyState==4){
+           if(xhr.status>=200&&xhr.status<300){
+             var result=JSON.parse(xhr.responseText);
+             console.log(result);
+        // 调用专门用于展示的函数（固定套路)     
+             showist(result);
+           }
+         }
+       }
+       xhr.open('GET','/pokelist',true);
+       xhr.send();
+     }
+     function  showist(data){
+      //  为了保证for循环新增数据是累加的，因此在for循环外创建一个空的塑料带准备打包所有内容
+      var str=''; 
+      for(var i=0;i<data.length;i++){
+       str+=`<li style="float:left;padding:20px">${data[i].id}${data[i].name}<br><img src="./poke/${data[i].id}.png" width="100"</li>`;
+        
+       }
+       console.log(str);
+      //  最后把打包好的空字符串给页面上的元素插入进去使用元素的innerHTML
+       show.innerHTML=str;
+     }
+    </script>
+    http://127.0.0.1:8080/05_list.html
+</body>
+</html>

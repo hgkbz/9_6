@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style></style>
+</head>
+<body>
+  <script>
+    function ajax(){
+    //  1.创建异步对象
+    var xhr=new XMLHttpRequest();
+    // 4，监听并接收数据返回
+    xhr.onreadystatechange=function(){
+      if(xhr.readyState==4){
+        if(xhr.status>=200&&xhr.status<300){
+          var result=xhr.responseText;
+          console.log(result);
+        }
+      }
+    }
+    // 2.设置请求信息
+    xhr.open('GET',`/jn?names=${n}`,true);
+    // 3.发送请求
+    xhr.send();
+  }
+  function ajax(){
+    var xhr=ne XMLHttpRequest();
+    xhr.onreadystatechange=function(){
+      if(xhr.readyState==4){
+        if(xhr.status>=200&&xhr.status<300){
+          var result=JSON.parse(xhr.responseText);
+          console.log(result);
+        }
+      }
+    }
+    xhr.open('GET',`/poket`,true);
+    xhr.send();
+  }
+  </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>皮卡丘</title>
+  <style></style>
+</head>
+<body>
+ <!-- 输入框，输入小精灵编号id，通过点击搜索，查找到小精灵的数据  -->
+  <input type="text" placeholder="小精灵id编号" id="pokeid">
+  <button id="btn">搜素</button>
+  <div id="show"></div>
+  <script>
+    // 1.获取所有元素
+    var pokeid=document.getElementById('pokeid');
+    var btn=document.getElementById('btn');
+    var show=document.getElementById('show');
+    // 2触发事件
+    // 通过事件触发，干3件事
+    // ①获取用户输入的数字
+    // ②调用ajax函数并把数字传入到ajax中
+    // ③数据回来把数据展示在页面中
+    btn.onclick=function(){
+      // ①获取用户输入的数字
+      var idval=pokeid.value.trim();
+// ②调用ajax函数并把数字传入到ajax中
+     ajax(idval);
+     function ajax(i){
+      //  1.创建异步对象
+      var xhr=new XMLHttpRequest();
+      xhr.onreadystatechange=function(){
+        if(xhr.readyState==4){
+          if(xhr.status>=200&&xhr.status<300){
+        // 使用JSON.parse将字符串格式对象转化为真的对象    
+            var result=JSON.parse(xhr.responseText);
+           console.log(result);
+          //  展示这个方法，放在外面，在里面调用
+           showlist(result);
+          }
+        }
+      }
+      xhr.open('GET',`/pokeshow?id=${i}`,true);
+      xhr.send();
+     }
+    //  显示函数show，需要接收后台数据
+    function showlist(r){
+       show.innerHTML=`<h2>${r.id}</h2>
+       <h3>${r.name}</h3>
+       <img src="./poke/${r.id}.png" width="100">`;   
+    }
+    };
+  </script>
+  
+  http://127.0.0.1:8080/04_show.html
+</body>
+</html>

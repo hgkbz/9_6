@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style></style>
+</head>
+<body>
+  <input type="text" name="" id="username">
+  <button id="btn">提交</button>
+  <script>
+    // 1,获取元素
+    var username=document.getElementById('username');
+    var btn=document.getElementById('btn');
+    // 2.元素触发事件
+    btn.onclick=function(){
+  //  3.收取用户传入的值
+  var unameval=username.value.trim();
+  
+  console.log(unameval);
+  if(unameval){
+    // 不是空我执行ajax函数
+    ajax(unameval);
+  }
+  else{alert('用户名不能为空')}
+    }
+   //ajax函数
+   function ajax(i){
+  //  1.创建异步对象
+  var xhr=new XMLHttpRequest();
+  // 4.监听等待数据返回
+  xhr.onreadystatechange=function(){
+    if(xhr.readyState==4){
+      if(xhr.status>=200&&xhr.status<300){
+        var result=xhr.responseText;
+        console.log(result);
+        // 对象形式的字符串！！！！！
+        var datajson=JSON.parse(result);
+  // 转化之后会把对象形式的字符串转成真的对象      
+        console.log(datajson.name);
+        document.write(datajson.name);
+      }
+    }
+  }
+  // 2.设置请求信息
+  xhr.open('GET',`/poker?id=${i}`,true);
+  // 3,发送请求
+  xhr.send();
+}
+  </script>
+</body>
+http://127.0.0.1:8080/03_trim.html
+</html>

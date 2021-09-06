@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style></style>
+</head>
+<body>
+  <div id="mydiv" style="width: 200px;height: 200px;">
+
+  </div>
+  <input type="color" name="" id="c">
+  <div id="show"></div>
+  <script>
+    // 先获取id才能控制元素
+    var mydiv=document.getElementById('mydiv');
+    var c=document.getElementById('c');
+    var show=document.getElementById('show');
+    // 元素的样式属性背景颜色属性=red
+   // mydiv.style.backgroundColor="red";
+    c.oninput=function(){
+      console.log(c.value)
+      // 在事件触发时给予获取的颜色
+      mydiv.style.backgroundColor=c.value;
+      show.innerHTML=c.value;
+      
+    }
+  </script>
+</body>
+</html>

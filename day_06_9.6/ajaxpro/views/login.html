@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>管理员登录</title>
+  <style></style>
+  <link rel="shortcut icon" href="#">
+</head>
+<body>
+  <h1>管理员登录</h1><hr>
+  <input type="text" placeholder="管理员名字" id="adminuser"><br>
+  <input type="password" placeholder="密码" id="adminpwd"><br>
+  <button id="btn">登录</button>
+  <!-- 脚本 -->
+  <script>
+      // 1.获取元素[3个]
+      var adminuser=document.getElementById('adminuser');
+      var adminpwd=document.getElementById('adminpwd');
+      var btn=document.getElementById('btn');
+      
+    //  2.事件触发
+      btn.onclick=function(){
+        // 3.收集用户数据（注意非空）
+        var namesval=adminuser.value.trim();
+        var pwdval=adminpwd.value.trim();
+        // 判断【2个都不为空】
+        if(namesval&&pwdval){
+            // 调用ajax函数
+            ajax(namesval,pwdval);
+        }  else{
+          alert('用户名不能为空');
+        }
+      
+      // 6.ajax函数
+      function ajax(n,p){
+        var xhr=new XMLHttpRequest();
+        xhr.onreadystatechange=function(){
+        if(xhr.readyState==4){
+          if(xhr.status>=200&&xhr.status<300){
+            var result=JSON.parse(xhr.responseText);
+            console.log(result);
+            if(result.code){
+              alert('登录成功')
+              // 跳转页面
+              window.location.href="./list.html"
+            }else{alert('密码或用户名错误')}
+          }
+        }
+      }
+    xhr.open('POST','/admin/login',true);
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send(`anames=${n}&apwd=${p}`);
+   }}
+  </script>
+   http://127.0.0.1:8080/login.html
+</body>
+</html>

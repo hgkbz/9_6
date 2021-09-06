@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>用户列表</title>
+  <style></style>
+  <link rel="shortcut icon" href="#">
+</head>
+<body>
+  <h1>用户列表</h1><hr>
+  <table align="center" border="1"  style="color: rgb(204, 18, 95);">
+    <thead>
+      <tr>
+        <th>序号</th>
+        <th>用户名</th>
+        <th>电话号码</th>
+        <th>是否会员</th>
+        <th>删除会员</th>
+      </tr>
+    </thead>
+    <tbody id="box" style="text-align: center;">
+      
+    </tbody>
+  </table>
+  <script>
+    // 1.获取元素
+    var box = document.getElementById('box');
+    // 2.调用ajax函数
+    ajax();
+    function ajax(){
+      var xhr=new XMLHttpRequest();
+      xhr.onreadystatechange= function(){
+        if(xhr.readyState==4){
+          if(xhr.status>=200&&xhr.status<300){
+            var result=JSON.parse(xhr.responseText);
+            // 我只是需要对象中一个数组，不是需要整个对象，只需要result.data  
+            console.log(result);
+            // 调用了一个遍历显示的函数show()
+            show(result.data);
+          }
+        }
+      }
+      xhr.open('GET','/admin/search',true);
+      xhr.send();
+    }
+    // show()函数，为了遍历显示数据插入到某个元素中
+    // 1.创建show（）对象
+    function show(arr){
+  // 2.创建一个空字符串用于累积标签【打包】
+      var str='';
+    // 3.遍历arr累加到str中
+    for(var i=0;i<arr.length;i++){
+      str+=`<tr>
+        <td>${arr[i].u_id}</td>
+        <td>${arr[i].u_names}</td>
+        <td>${arr[i].u_phone}</td>
+        <td>${arr[i].u_member}</td>
+        <td><button>删除</button></td>
+      </tr>`;
+    }
+    // 把字符串插入到元素中
+    box.innerHTML=str;
+    }
+    
+  </script>
+  http://127.0.0.1:8080/list.html
+</body>
+</html>
